@@ -1,12 +1,28 @@
 - [:octocat: 首页](/README)
 - :memo: 目录
-   - 读书笔记
-     - 
    - 知识积累
-     - [Linux操作](/md/知识积累/Linux操作.md)
-   - 面试经验
-     - 
+     - Linux
+       - [Linux操作](/md/知识积累/linux/Linux操作.md)
+       - [Nginx离线升级](/md/知识积累/linux/Nginx离线升级.md)
+       - [Openssh离线升级](/md/知识积累/linux/Openssh离线升级.md)
+     - MySQL
+       - [Mysql主从同步问题修复](/md/知识积累/mysql/Mysql主从同步问题修复.md)
+       - [MySQL优化](/md/知识积累/mysql/MySQL优化.md)
+       - [MySQL小版本离线升级](/md/知识积累/mysql/MySQL小版本离线升级.md)
+       - [Mysql的一些技巧](/md/知识积累/mysql/Mysql的一些技巧.md)
+     - Redis
+       - [快速搭建redis集群](/md/知识积累/redis/快速搭建redis集群.md)
+     - 分布式
+       - [SEATA-AT模式在项目中的实践](/md/项目实战/分布式/seata/SEATA-AT模式在项目中的实践.md)
    - 项目实战
+     - 工作日常
+       - [AS源码编译](/md/项目实战/工作日常/AS源码编译.md)
+     - 实践系列
+       - [agent+ddd实践案例](/md/项目实战/实践系列/agent+ddd实践案例.md)
    - 随笔闲谈
+     - [学习算法有什么用](/md/随笔闲谈/学习算法有什么用.md)
+   - 读书笔记
+     - [种子](/md/读书笔记/种子.md)]
    - 杂七杂八
      - [好用的软件](/md/杂七杂八/好用的软件.md)
+     - [Docsify搭建博客](/md/杂七杂八/Docsify搭建博客.md)

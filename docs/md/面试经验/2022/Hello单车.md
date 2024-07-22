@@ -1,0 +1,59 @@
+### 一轮
+- 业务相关（Spring security、oauth2、c端用户认证方式）
+   - Spring security：
+   - oauth2:
+   - C端：C端用户登录时，会使用code（标识某次某个用户的登录，具有随机性）请求服务器，获取到status及用户登录信息（token）后，使用token进行访问
+- PC的作用：指令执行、线程恢复、异常处理
+- run方法和start方法的区别
+   - run方法：同步，在主线程中继续执行
+   - start方法：异步
+- spring中 resource和autowired的区别
+   - resource：默认按名称装配注入，只有在名称找不到时才会使用类型
+   - autowired：默认按照类型注入、默认依赖对象必须存在
+   - inject：是根据**类型**进行自动装配的，如果需要按名称进行装配，则需要配合@Named
+- gateway网关的原理
+   - 路由：通过path构造route信息，在ribbon中找到对应的ip+port
+   - 拦截：filter
+- volitile的原理，怎样实现内存可见性：
+   - 刷新主存
+- GC的原理
+   - 引用计数法：被引用时，+1，如果引用数为0，则可以回收
+   - 可达性分析法：从GC roots开始dfs，如果对象没有引用链相连，则可以回收
+- 类加载机制：
+   - 方法区，存放虚拟机加载的类信息、常量、静态变量
+   - 虚拟机栈，存放局部变量
+   - 类加载：class文件加载到内存、实现校验、解析、初始化。
+      - 加载：查找到class文件并载入
+      - 验证：检查加载class文件的正确性
+      - 准备：给类中的静态变量分配空间
+      - 解析：修改为直接引用
+      - 初始化：静态变量和静态代码块初始化工作
+   - 双亲委派：当一个类收到加载的请求时，会优先委派给父类进行加载
+- http请求中get、post的区别及幂等性的保障方式
+   - get：有长度限制
+   - post：post不保证幂等，
+   - 幂等：去重表/version控制/分布式锁
+- spring中，请求进来的执行过程
+   - 客户端发送请求，抵达dispatch servlet
+   - 在handler mapping中找到对应的handler
+   - 解析到handler后，开始由handler adaptor处理
+   - handler adaptor找到真正的handler处理
+   - 返回model and view
+   - 从 viewResolver中找到真正的view
+   - DispaterServlet把返回的Model传给View。
+   - 通过View返回给请求者（浏览器）
+- nio、bio、aio
+   - 
+
+- rpc：
+   - 主要结构：客户端、客户端存根、服务端存根、服务端
+   - 客户端存根和服务端存根主要使用代理模式生成
+   - 客户端存根用来将客户端的请求数据序列化，并请求服务端存根，获取响应
+   - 服务端存根接收客户端存根请求，反序列化后请求服务端，获取结构后再次序列化
+   - 客户端存根反序列化结果
+- concurrentHashMap和HashMap的区别，需参考源码：
+   - chm：在1.7之前使用的时segment lock保证线程安全；在1.7之后针对node，使用syn + cas保证线程安全
+   - HashMap：1.7之前，使用链表解决hash冲突；1.7之后，链表加红黑树、尾部插入数据
+- JIT
+   - 即时编译器，在hotspot的虚拟机中运行，用于将热点代码编译为本地字节码，并进行一系列的优化
+   - 怎样判断是热点：栈顶采样/计数器统计
