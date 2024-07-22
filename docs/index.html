@@ -6,85 +6,59 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="/assets/css/vue.css">
-  <link rel="stylesheet" href="/assets/css/gitalk.css">
-  <script>
-      var _hmt = _hmt || [];
-      (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?b3354307876925c625a24bb138d2177c";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-  </script>
+  <link rel="stylesheet" href="assets/css/vue.css">
+  <link rel="stylesheet" href="assets/css/gitalk.css">
 </head>
 <body>
 <div id="app"></div>
 <script>
-    var gitalkConfig = {
-      clientID: '4a657aa4ae6c0f1862a1',
-      clientSecret: '94793d5bac0c884a8798ea941f7c5bc9fb004720',
-      repo: 'https://gitee.com/ymc1991/learn-hub',
-      owner: 'yumc',
-      admin: ["yumc"],
-      distractionFreeMode: false
-    };
-    window.$docsify = {
-      name: 'SchrodingerY',
-      repo: 'https://gitee.com/ymc1991/learn-hub',
-      auto2top: true,
-      coverpage: true,
-      loadSidebar: true,
-      maxLevel: 4,
-      subMaxLevel: 2,
-      search: {
-        paths: 'auto',
-        placeholder: '🔍 Type to search ',
-        noData: '😞 No Results! ',
-        depth: 6
-      },
-      pagination: {
-        previousText: 'PREVIOUS',
-        nextText: 'NEXT',
-        crossChapter: true
-      },
-      plugins: [
-        function (hook, vm) {
-          hook.doneEach(function() {
-            var label, domObj, main, divEle, gitalk;
-            label = md5(decodeURI(vm.route.path.split("/").pop()));
-            domObj = Docsify.dom;
-            main = domObj.getNode("#main");
+  window.$docsify = {
+    // 项目名称
+    name: '个人学习站点',
+    // 仓库地址，点击右上角的Github章鱼猫头像会跳转到此地址
+    repo: 'https://gitee.com/ymc1991/learn-hub',
+    auto2top: true,
+    coverpage: true,
+    loadSidebar: true,
+    maxLevel: 5,
+    subMaxLevel: 3,
+    // 侧边栏展开层级
+    sidebarDisplayLevel: 0,
+    search: {
+      paths: 'auto',
+      placeholder: '🔍 Type to search ',
+      noData: '😞 No Results! ',
+      depth: 6
+    },
+    pagination: {
+      previousText: 'PREVIOUS',
+      nextText: 'NEXT',
+      crossChapter: true
+    },
+    hideCode: {
+      scroll: false, // Enable scrolling
+      height: 300 // Max height
+    }
+  }
+</script>
 
-            Array.apply(
-              null,
-              document.querySelectorAll("div.gitalk-container")
-            ).forEach(function(ele) {
-              ele.remove();
-            });
-      
-            divEle = domObj.create("div");
-            divEle.id = "gitalk-container-" + label;
-            divEle.className = "gitalk-container";
-            divEle.style = "width: " + main.clientWidth + "px; margin: 0 auto 20px;";
-            domObj.appendTo(domObj.find(".content"), divEle);
-            gitalk = new Gitalk(
-              Object.assign(gitalkConfig, { id: !label ? "home" : label })
-            );
-            gitalk.render("gitalk-container-" + label);
-          });
-        }
-      ]
-    }                                 
-  </script>
-
-<script src="/assets/js/md5.js"></script>
-<script src="/assets/js/docsify.min.js"></script>
-<script src="/assets/js/gitalk.min.js"></script>
+<script src="assets/js/md5.js"></script>
+<script src="assets/js/docsify.min.js"></script>
+<script src="assets/js/gitalk.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.js"></script>
-<script src="/assets/js/docsify-pagination.min.js"></script>
-<script src="/assets/js/zoom-image.js"></script>
-<script src="/assets/js/prism-bash.js"></script>
-<script src="/assets/js/prism-java.min.js"></script>
+<script src="assets/js/docsify-pagination.min.js"></script>
+<script src="assets/js/zoom-image.js"></script>
+<script src="assets/js/prism-bash.js"></script>
+<script src="assets/js/prism-java.min.js"></script>
+<!-- 字数统计 -->
+<script src="https://fastly.jsdelivr.net/npm/docsify-count@latest/dist/countable.min.js"></script>
+<!-- 代码拷贝 -->
+<script src="assets/js/copy.js"></script>
+<!--hide code-->
+<script src="assets/js/hidecode.js"></script>
+
+<!-- 侧边栏插件 -->
+<script src="//fastly.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+<link rel="stylesheet" href="//fastly.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css" />
 </body>
 </html>
