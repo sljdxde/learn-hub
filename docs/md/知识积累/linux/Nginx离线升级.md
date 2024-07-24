@@ -16,14 +16,15 @@
 3.  进入解压后的目录下，进行_configure_配置，但是这一步有很多坑点！ 
    -  ⚠️ 坑点1：直接执行时可能会提示依赖缺失，那么需要先执行 `sudo yum install -y gcc pcre pcre-devel openssl openssl-devel gd gd-devel` 进行安装 
    -  ⚠️坑点2：在configure后面需要进行执行参数编写，先把我执行的指令放出来  
-```shell
-./configure --prefix=/etc/nginx \
---sbin-path=/usr/sbin/nginx \
---conf-path=/etc/nginx/nginx.conf \
---error-log-path=/var/log/nginx/error.log \
---http-log-path=/var/log/nginx/access.log \
---pid-path=/run/nginx.pid
-```
+
+   ```shell
+   ./configure --prefix=/etc/nginx \
+   --sbin-path=/usr/sbin/nginx \
+   --conf-path=/etc/nginx/nginx.conf \
+   --error-log-path=/var/log/nginx/error.log \
+   --http-log-path=/var/log/nginx/access.log \
+   --pid-path=/run/nginx.pid
+   ```
 
    -  具体的编写参数说明： 
       - `prefix`：前缀
@@ -48,59 +49,59 @@
       - _权限不足：_修改配置文件中的user为root
       - _dynamic modules版本异常：_注释掉配置文件中的`include /usr/share/nginx/modules/*.conf;`
    -  这里放一个我的配置文件  
-```shell
-user nginx;
-worker_processes auto;
-error_log /var/log/nginx/error.log;
-pid /run/nginx.pid;
+      ```conf
+      user nginx;
+      worker_processes auto;
+      error_log /var/log/nginx/error.log;
+      pid /run/nginx.pid;
 
-# Load dynamic modules. See /usr/share/doc/nginx/README.dynamic.
-# include /usr/share/nginx/modules/*.conf;
+      # Load dynamic modules. See /usr/share/doc/nginx/README.dynamic.
+      # include /usr/share/nginx/modules/*.conf;
 
-events {
-    worker_connections 1024;
-}
+      events {
+         worker_connections 1024;
+      }
 
-http {
-    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-                      '$status $body_bytes_sent "$http_referer" '
-                      '"$http_user_agent" "$http_x_forwarded_for"';
+      http {
+         log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                           '$status $body_bytes_sent "$http_referer" '
+                           '"$http_user_agent" "$http_x_forwarded_for"';
 
-    access_log  /var/log/nginx/access.log  main;
+         access_log  /var/log/nginx/access.log  main;
 
-    sendfile            on;
-    tcp_nopush          on;
-    tcp_nodelay         on;
-    keepalive_timeout   65;
-    types_hash_max_size 2048;
+         sendfile            on;
+         tcp_nopush          on;
+         tcp_nodelay         on;
+         keepalive_timeout   65;
+         types_hash_max_size 2048;
 
-    include             /etc/nginx/mime.types;
-    default_type        application/octet-stream;
+         include             /etc/nginx/mime.types;
+         default_type        application/octet-stream;
 
-    # Load modular configuration files from the /etc/nginx/conf.d directory.
-    # See http://nginx.org/en/docs/ngx_core_module.html#include
-    # for more information.
-    include /etc/nginx/conf.d/*.conf;
+         # Load modular configuration files from the /etc/nginx/conf.d directory.
+         # See http://nginx.org/en/docs/ngx_core_module.html#include
+         # for more information.
+         include /etc/nginx/conf.d/*.conf;
 
-    server {
-        listen       8080 default_server;
-        listen       [::]:8080 default_server;
-        server_name  _;
-        root         /usr/share/nginx/html;
+         server {
+            listen       8080 default_server;
+            listen       [::]:8080 default_server;
+            server_name  _;
+            root         /usr/share/nginx/html;
 
-        # Load configuration files for the default server block.
-        include /etc/nginx/default.d/*.conf;
-        location / {
-        }
-        error_page 404 /404.html;
-            location = /40x.html {
-        }
-        error_page 500 502 503 504 /50x.html;
-            location = /50x.html {
-        }
-    }
-}
-```
+            # Load configuration files for the default server block.
+            include /etc/nginx/default.d/*.conf;
+            location / {
+            }
+            error_page 404 /404.html;
+                  location = /40x.html {
+            }
+            error_page 500 502 503 504 /50x.html;
+                  location = /50x.html {
+            }
+         }
+      }
+      ```
 
 ## 配置&&验证
 

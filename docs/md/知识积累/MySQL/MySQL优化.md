@@ -1,7 +1,6 @@
 ### MySQL的整体架构
 1. 连接方式：包括长连接和短连接。查看当前连接状态：`show global status like 'Thread%';`
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/5369311/1621858493455-1792452a-caab-420d-b779-4f0a4cab1c9d.png#clientId=u80231bf5-3561-4&from=paste&height=314&id=u4faa0681&originHeight=504&originWidth=764&originalType=binary&size=37746&status=done&style=none&taskId=ud6bca676-cd7b-4ab2-b6eb-ebe4ae0ef60&width=476)
 
 - 常见连接状态包括：
    - `sleep`：等待客户端发送一个请求
@@ -10,21 +9,19 @@
 - 允许的最大连接数：
    - 5.7版本默认151个，最大16384（2^14）
    - 查询方式：`show variables like 'max_connections';`
-2. 通信方式：采用半双工通信，即客户端要么在发送数据，要么在接收数据，两者不能同时发生。因此，在使用mybatis编程时，需要避免批量插入大量数据的操作，否则可能导致数据量过大，超过mysql设定的`max_allowed_packet`的限制。
-3. 查询过程
+1. 通信方式：采用半双工通信，即客户端要么在发送数据，要么在接收数据，两者不能同时发生。因此，在使用mybatis编程时，需要避免批量插入大量数据的操作，否则可能导致数据量过大，超过mysql设定的`max_allowed_packet`的限制。
+2. 查询过程
    1. 查询缓存（效果不佳，已被8.0移除）
    2. 语法解析与预处理：在语法解析阶段，对语法进行校验；在预处理阶段，对sql语句中的表、列、字段名等进行解析
    3. 查询优化及查询执行计划：使用如下语句，得到优化器执行计划（消耗性能，仅供分析使用）
-```sql
-SHOW VARIABLES LIKE 'optimizer_trace';
+      ```sql
+      SHOW VARIABLES LIKE 'optimizer_trace';
 
-set optimizer_trace='enabled=on';
-```
+      set optimizer_trace='enabled=on';
+      ```
 
 4. 存储引擎：在 MySQL 里面，我们创建的每一张表都可以指定它的存储引擎，而不是一个数据库只能使用一个存储引擎
    1. 任何一个存储引擎都有一个 frm 文件，这个是表结构定义文件；不同的存储引擎存放数据的方式不一样，产生的文件也不一样，innodb 是 1 个，memory 没有，myisam 是两个
-
-![](https://cdn.nlark.com/yuque/0/2021/webp/5369311/1621861222129-c29e14a3-fedc-4010-bc13-6bdfc77a7d08.webp#clientId=u80231bf5-3561-4&from=paste&height=248&id=u4345ba0b&originHeight=312&originWidth=435&originalType=url&status=done&style=none&taskId=u5cf07b9f-a0bf-4374-8810-23087ba462b&width=345.5)
 
    2. MyISAM：应用范围比较小。表级锁定限制了读/写的性能，因此在 Web 和数据仓库配置中，它通常用于只读或以读为主的工作
       1. 支持表级别的锁（插入和更新会锁表）。不支持事务
@@ -39,13 +36,9 @@ set optimizer_trace='enabled=on';
       1. 如果对数据一致性要求比较高，需要事务支持，可以选择 InnoDB。
       2. 如果数据查询多更新少，对查询性能要求比较高，可以选择 MyISAM。
       3. 如果需要一个用于查询的临时表，可以选择 Memory。
-5. 体系结构图
 
-![](https://cdn.nlark.com/yuque/0/2021/jpeg/5369311/1621864750962-5299ae5d-ea5a-4d47-809d-8fab3a93cf3f.jpeg#clientId=u80231bf5-3561-4&from=paste&height=411&id=u63e17db4&originHeight=476&originWidth=720&originalType=url&status=done&style=none&taskId=u6d4f4f03-67ea-402a-8f6a-d19d89a7fa4&width=621)
-### MySQL的执行过程
-#### 执行计划
 
-1. 关键字段
+5. 关键字段
    1. id：执行select子句或操作表的顺序，越大越靠前。针对主查询和子查询。
    2. select_type：查询类型
       1. simple：不使用子查询或union
@@ -73,21 +66,6 @@ set optimizer_trace='enabled=on';
       2. Using index：sql使用了索引覆盖，无需回表查询
       3. Using temporary：使用了临时表（常见于 order by 和 group by）
       4. Using filesort：对数据使用了外部索引排序
-2. 
-
-### 规范设计
-
-- 
-
-
-### 业务层优化
-
-
-### 架构层优化
-
-
-### 数据库优化
-
 
 
 ### 参考文章
