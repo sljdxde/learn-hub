@@ -1,24 +1,16 @@
-:::tips
-会议时间：2023-08-30
-:::
-## 会前材料 
-> 会议相关PPT
 
-[POC测试汇报(1).pptx](https://www.yuque.com/attachments/yuque/0/2023/pptx/5369311/1693807400898-2ae320b5-041d-43ba-b7c6-87912ce625d0.pptx?_lake_card=%7B%22src%22%3A%22https%3A%2F%2Fwww.yuque.com%2Fattachments%2Fyuque%2F0%2F2023%2Fpptx%2F5369311%2F1693807400898-2ae320b5-041d-43ba-b7c6-87912ce625d0.pptx%22%2C%22name%22%3A%22POC%E6%B5%8B%E8%AF%95%E6%B1%87%E6%8A%A5(1).pptx%22%2C%22size%22%3A1602183%2C%22ext%22%3A%22pptx%22%2C%22source%22%3A%22%22%2C%22status%22%3A%22done%22%2C%22download%22%3Atrue%2C%22taskId%22%3A%22u80276ebb-ddb6-494a-ad30-116e5a2c526%22%2C%22taskType%22%3A%22upload%22%2C%22type%22%3A%22application%2Fvnd.openxmlformats-officedocument.presentationml.presentation%22%2C%22__spacing%22%3A%22both%22%2C%22mode%22%3A%22title%22%2C%22id%22%3A%22u42295e55%22%2C%22margin%22%3A%7B%22top%22%3Atrue%2C%22bottom%22%3Atrue%7D%2C%22card%22%3A%22file%22%7D)
 ## 会议议题
 
-- 建行POC测试情况介绍及讨论
+- X行POC测试情况介绍及讨论
 - POC过程中存在的问题及改进方案
 ## 会议结论
 ### 标准解决方案
 
-- X版本做系统性疲劳测试；Y版本做关键组件（流立方、sde）的疲劳测试。疲劳测试参照建行标准。
+- X版本做系统性疲劳测试；Y版本做关键组件的疲劳测试。疲劳测试参照X行标准。
 ### 非功能测试
 
-- 参考建行标准，整理并输出**标准非功能测试方案**
-> 非功能测试参考文档：
+- 参考X行标准，整理并输出**标准非功能测试方案**
 
-[非功能测试标准化文档（参考）.docx](https://www.yuque.com/attachments/yuque/0/2023/docx/5369311/1693812930313-65c1adbc-2b2b-467f-9b38-54a12563f0e6.docx?_lake_card=%7B%22src%22%3A%22https%3A%2F%2Fwww.yuque.com%2Fattachments%2Fyuque%2F0%2F2023%2Fdocx%2F5369311%2F1693812930313-65c1adbc-2b2b-467f-9b38-54a12563f0e6.docx%22%2C%22name%22%3A%22%E9%9D%9E%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%A0%87%E5%87%86%E5%8C%96%E6%96%87%E6%A1%A3%EF%BC%88%E5%8F%82%E8%80%83%EF%BC%89.docx%22%2C%22size%22%3A19328%2C%22ext%22%3A%22docx%22%2C%22source%22%3A%22%22%2C%22status%22%3A%22done%22%2C%22download%22%3Atrue%2C%22taskId%22%3A%22u235d3a7f-a869-419b-9c9b-a3744a13545%22%2C%22taskType%22%3A%22upload%22%2C%22type%22%3A%22application%2Fvnd.openxmlformats-officedocument.wordprocessingml.document%22%2C%22__spacing%22%3A%22both%22%2C%22mode%22%3A%22title%22%2C%22id%22%3A%22u0b644e8a%22%2C%22margin%22%3A%7B%22top%22%3Atrue%2C%22bottom%22%3Atrue%7D%2C%22card%22%3A%22file%22%7D)
 ### POC解决方案
 
    - 针对POC的场景，梳理并规范化一套“短平快”的解决方案
@@ -88,7 +80,7 @@
 #### 引擎
 
 - 引擎多节点CPU资源使用不平均
--  4台引擎组成的集群，高可用测试中，单台引擎节点重启后，TPS会高于初始启动
+- 4台引擎组成的集群，高可用测试中，单台引擎节点重启后，TPS会高于初始启动
 - 引擎的CPU利用率较低
    - 原因猜测：
       - 序列化导致cpu无法提升，可能存在类锁？
@@ -96,7 +88,7 @@
       - numa调优未进行？
    - 验证方式：
       - 自己写一个小程序，查询redis或as，观察当TPS提升时，延时是否会有上升
-#### 流立方
+#### 计算
 
 - 集群中一个节点kill掉时，qps下降明显
 #### jmeter
@@ -108,7 +100,7 @@
 - 引擎需要前置字段型判断，根据事件字段可以直接进行判断的，无需执行指标查询
 - 引擎查询指标按需加载
 - 同一批次查询中，相同查询合并，减少报文大小
-#### 流立方
+#### 计算
 
 - 针对同一批次中，仅时间窗口不同的指标查询，进行合并，只查一次
 ## 执行计划
