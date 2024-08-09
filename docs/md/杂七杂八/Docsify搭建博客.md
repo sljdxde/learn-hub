@@ -10,7 +10,6 @@
 6. 本地启动项目：docsify serve docs
 7. 启动验证：访问 localhost:3000
 
-![](https://cdn.nlark.com/yuque/0/2024/png/5369311/1705548718340-a068a612-3563-4db8-a420-dcdefbb1a440.png#averageHue=%23d8e8c1&clientId=u610733cd-edf8-4&from=paste&id=u2bfdb3fb&originHeight=882&originWidth=1900&originalType=url&ratio=1.5&rotation=0&showTitle=false&status=done&style=none&taskId=ud580fd6d-a7d5-45bd-8502-f3d7cf456f6&title=)
 # Docsify集成gitlab pages
 
 - 网上资料很多，项目中没有用到，不再赘述
@@ -18,7 +17,8 @@
 ## nginx
 
 - 编译
-```nginx
+
+``` nginx
 ./configure --prefix=/home/cubebase/nginx \
 --user=cubebase \
 --group=cubebase \
@@ -49,6 +49,7 @@
 ```
 
 - 我的nginx配置文件
+
 ```nginx
 user  root;
 #groups root;
